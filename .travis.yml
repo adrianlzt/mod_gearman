@@ -18,7 +18,7 @@ notifications:
     - sven@nierlein.de
 env:
   global:
-   - secure: ""
+   - secure: "LGrZlR/I3OuwuHkJT4X/Ng8kfOLyDr43a22GOIsYzANdyJmICHqlT08er+wjpboFP0jO5Peyn8XpKCSEZu62MnR37La3vtcvzYcTUUiwNIN7ULPOgfv3AsstKsgSy4Z1P0gs7N3kxzrXUpZrmdY3yt+kls+iM92Z8+CKg0ki/Q0="
 addons:
   coverity_scan:
     project:
@@ -27,4 +27,4 @@ addons:
     notification_email: sven@nierlein.org
     build_command_prepend: ./autogen.sh && ./configure
     build_command: make
-    branch_pattern: master
+    branch_pattern: travistest
