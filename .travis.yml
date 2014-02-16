@@ -1,0 +1,30 @@
+language: c
+compiler:
+  - gcc
+before_install:
+  - sudo apt-get update
+install:
+  - sudo apt-get install help2man nagios-plugins-basic autoconf automake libltdl-dev libtool libncurses5-dev devscripts pkg-config libperl-dev build-essential devscripts gearman-job-server naemon-dev
+script:
+  - git config --global user.email "travis@localhost"
+  - git config --global user.name "Travis Testuser"
+  - ./autogen.sh
+  - ./configure    || exit 1
+  - make           || exit 1
+  - make install DESTDIR=$(pwd)/_install || exit 1
+  - make test
+notifications:
+  email:
+    - sven@nierlein.de
+env:
+  global:
+   - secure: ""
+addons:
+  coverity_scan:
+    project:
+      name: "sni/mod_gearman"
+      description: "Distributed Monitoring with Naemon"
+    notification_email: sven@nierlein.org
+    build_command_prepend: ./autogen.sh && ./configure
+    build_command: make
+    branch_pattern: master
